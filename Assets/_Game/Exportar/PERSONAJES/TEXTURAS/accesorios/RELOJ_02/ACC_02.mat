@@ -94,7 +94,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Rugosidad:
-        m_Texture: {fileID: 2800000, guid: 3838f97b4bfc7e041aff16a73bdf09d1, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a290ad27b8d8bd4e8efda4395831721, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
