@@ -36,6 +36,7 @@ public class Split : MonoBehaviour
 
     private void Awake()
     {
+        SaveManagers.GetComponent<SaveManager>().Save();
         //Inicializamos posiciones
         pos = new int[13];
         //Cargamos datos
