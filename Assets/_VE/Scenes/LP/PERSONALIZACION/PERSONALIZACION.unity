@@ -2599,6 +2599,53 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7255248093947067840}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &826943520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 826943521}
+  - component: {fileID: 826943522}
+  m_Layer: 0
+  m_Name: SaveData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &826943521
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826943520}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4383835, y: 0.70660174, z: 0.8015373}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &826943522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 826943520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 181b82ad28f886542aca429a2b853fa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  personalizacion: {fileID: 1576545702}
+  split:
+    pos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &831724875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5749140252755887860, guid: f7049d1bd08befd499853a3147e331f3,
@@ -5099,8 +5146,8 @@ MonoBehaviour:
   - 
   referencia: 2|2|2|2|2|2|2|2|1|1|1
   PosGuardada: 
-  DatoPos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   pos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+  SaveManagers: {fileID: 826943520}
   genero: 0
   genNum: 0
   accesorios_Reloj:
@@ -8552,6 +8599,11 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3611730581397815473, guid: f7049d1bd08befd499853a3147e331f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5070286771084599707, guid: f7049d1bd08befd499853a3147e331f3,
         type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -2,6 +2,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using UnityEngine;
+    using System;
+using Photon.Pun.Demo.PunBasics;
+
 
 public class Split : MonoBehaviour
 {
@@ -10,11 +13,11 @@ public class Split : MonoBehaviour
     public string referencia;
     public int[] PosGuardada;
 
-    //??
-    public int[] DatoPos;
+    //Variable para las posiciones de guardado
     public int[] pos;
+    //Referencia al objeto de guardado
+    public GameObject SaveManagers;
 
-    
 
     //variables para identificar el genero
     public bool genero;
@@ -35,33 +38,20 @@ public class Split : MonoBehaviour
     public GameObject[] sombreros;
     public GameObject[] zapatos;
 
-    [ContextMenu("Convertir")]
+    private void Awake()
+    {
+        //Inicializamos posiciones
+        pos = new int[13];
+        //Cargamos datos
+        SaveManagers.GetComponent<SaveManager>().CargarDatos();
+    }
 
     public void Start()
     {
-        DatoPos = new int[13];
-        pos = new int[13];
-
-
-        pos[0] = PlayerPrefs.GetInt("reloj", 0);
-        pos[1] = PlayerPrefs.GetInt("maleta_f", 0);
-        pos[2] = PlayerPrefs.GetInt("maleta_m", 0);
-        pos[3] = PlayerPrefs.GetInt("ropas_f", 0);
-        pos[4] = PlayerPrefs.GetInt("ropas_m", 0);
-        pos[5] = PlayerPrefs.GetInt("cabezas_f", 0);
-        pos[6] = PlayerPrefs.GetInt("cabezas_m", 0);
-        pos[7] = PlayerPrefs.GetInt("cejas_f", 0);
-        pos[8] = PlayerPrefs.GetInt("cejas_m", 0);
-        pos[9] = PlayerPrefs.GetInt("pelos_f", 0);
-        pos[10] = PlayerPrefs.GetInt("pelos_m", 0);
-        pos[11] = PlayerPrefs.GetInt("sombrero", 0);
-        pos[12] = PlayerPrefs.GetInt("zapatos", 0);
-
-
-
         Gen();
     }
 
+    //[ContextMenu("Convertir")]
     //???
     /*
     public void Covertir()
@@ -148,15 +138,12 @@ public class Split : MonoBehaviour
 
     */
 
-
+    
     //Metodo invocado desde BtnReloj para el cambio de estilo del reloj
     public void Reloj() 
     {
-        //Asignamos la posicion
+        //Asignamos la posicion para los objetos de la lista
         pos[0]++;
-
-        // ???
-        DatoPos[0] = pos[0];
 
         //Si sobrepasa el tamaño del array lo volvemos a cero
         if (pos[0] > accesorios_Reloj.Length - 1)
@@ -169,22 +156,20 @@ public class Split : MonoBehaviour
         {
             accesorios_Reloj[i].SetActive(pos[0] == i);
         }
-        //Guardamos el ultimo item elegido
-        PlayerPrefs.SetInt("reloj", pos[0]);
 
+        //Guardamos el ultimo item elegido en la posicion indicada
+        SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[0] , 0);
     }
 
     //Metodo invocado desde BtnMaleta para el cambio de estilo de la maleta
     public void Maleta()
     {
         //Validamos si es Femenino o Masculino
+        //Femenino
         if (genero)
         {
             //Asignamos la posicion
             pos[1]++;
-
-            // ???
-            DatoPos[1] = pos[1];
 
             //Si sobrepasa el tamaño del array lo volvemos a cero
             if (pos[1] > maleta_F.Length - 1)
@@ -197,14 +182,14 @@ public class Split : MonoBehaviour
             {
                 maleta_F[i].SetActive(pos[1] == i);
             }
-            //Guardamos el ultimo item elegido
-            PlayerPrefs.SetInt("maleta_f", pos[1]);
+
+            //Guardamos el ultimo item elegido en la posicion indicada
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[1], 1);
         }
         else
+        //Masculino
         {
             pos[2]++;
-
-            DatoPos[2] = pos[2];
 
             if (pos[2] > maleta_M.Length - 1)
             {
@@ -215,7 +200,8 @@ public class Split : MonoBehaviour
             {
                 maleta_M[i].SetActive(pos[2] == i);
             }
-            PlayerPrefs.SetInt("maleta_m", pos[2]);
+
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[2], 2);
         }
     }
    
@@ -223,13 +209,11 @@ public class Split : MonoBehaviour
     public void Ropa()
     {
         //Validamos si es Femenino o Masculino
+        //Femenino
         if (genero)
         {
             //Asignamos la posicion
             pos[3]++;
-
-            // ???
-            DatoPos[3] = pos[3];
 
             //Si sobrepasa el tamaño del array lo volvemos a cero
             if (pos[3] > ropas_F.Length - 1)
@@ -242,14 +226,14 @@ public class Split : MonoBehaviour
             {
                 ropas_F[i].SetActive(pos[3] == i);
             }
-            //Guardamos el ultimo item elegido
-            PlayerPrefs.SetInt("ropas_f", pos[3]);
+
+            //Guardamos el ultimo item elegido en la posicion indicada
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[3], 3);
         }
+        //Masculino
         else
         {
             pos[4]++;
-
-            DatoPos[4] = pos[4];
 
             if (pos[4] > ropas_M.Length - 1)
             {
@@ -260,7 +244,8 @@ public class Split : MonoBehaviour
             {
                 ropas_M[i].SetActive(pos[4] == i);
             }
-            PlayerPrefs.SetInt("ropas_m", pos[4]);
+
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[4], 4);
         }
     }
 
@@ -268,13 +253,11 @@ public class Split : MonoBehaviour
     public void Cabeza()
     {
         //Validamos si es Femenino o Masculino
+        //Femenino
         if (genero)
         {
             //Asignamos la posicion
             pos[5]++;
-
-            // ???
-            DatoPos[5] = pos[5];
 
             //Si sobrepasa el tamaño del array lo volvemos a cero
             if (pos[5] > cabezas_F.Length - 1)
@@ -287,14 +270,14 @@ public class Split : MonoBehaviour
             {
                 cabezas_F[i].SetActive(pos[5] == i);
             }
-            //Guardamos el ultimo item elegido
-            PlayerPrefs.SetInt("cabezas_f", pos[5]);
+
+            //Guardamos el ultimo item elegido en la posicion indicada
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[5], 5);
         }
         else
+        //Masculino
         {
             pos[6]++;
-
-            DatoPos[6] = pos[6];
 
             if (pos[6] > cabezas_M.Length - 1)
             {
@@ -305,21 +288,21 @@ public class Split : MonoBehaviour
             {
                 cabezas_M[i].SetActive(pos[6] == i);
             }
-            PlayerPrefs.SetInt("cabezas_m", pos[6]);
+
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[6], 6);
         }
     }
+
 
     //Metodo invocado desde BtnCejas para el cambio de estilo de las cejas
     public void Cejas()
     {
         //Validamos si es Femenino o Masculino
+        //Femenino
         if (genero)
         {
             //Asignamos la posicion
             pos[7]++;
-
-            // ???
-            DatoPos[7] = pos[7];
 
             //Si sobrepasa el tamaño del array lo volvemos a cero
             if (pos[7] > cejas_F.Length - 1)
@@ -332,14 +315,13 @@ public class Split : MonoBehaviour
             {
                 cejas_F[i].SetActive(pos[7] == i);
             }
-            //Guardamos el ultimo item elegido
-            PlayerPrefs.SetInt("cejas_f", pos[7]);
+            //Guardamos el ultimo item elegido en la posicion indicada
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[7], 7);
         }
         else
+        //Masculino
         {
             pos[8]++;
-
-            DatoPos[8] = pos[8];
 
             if (pos[8] > cejas_M.Length - 1)
             {
@@ -350,21 +332,20 @@ public class Split : MonoBehaviour
             {
                 cejas_M[i].SetActive(pos[8] == i);
             }
-            PlayerPrefs.SetInt("cejas_m", pos[8]);
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[8], 8);
         }
     }
+
 
     //Metodo invocado desde BtnPelos para el cambio de estilo del peinado
     public void Pelos()
     {
         //Validamos si es Femenino o Masculino
+        //Femenino
         if (genero)
         {
             //Asignamos la posicion
             pos[9]++;
-
-            // ???
-            DatoPos[9] = pos[9];
 
             //Si sobrepasa el tamaño del array lo volvemos a cero
             if (pos[9] > pelos_F.Length - 1)
@@ -377,14 +358,13 @@ public class Split : MonoBehaviour
             {
                 pelos_F[i].SetActive(pos[9] == i);
             }
-            //Guardamos el ultimo item elegido
-            PlayerPrefs.SetInt("pelos_f", pos[9]);
+            //Guardamos el ultimo item elegido en la posicion indicada
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[9], 9);
         }
         else
+        //Masculino
         {
             pos[10]++;
-
-            DatoPos[10] = pos[10];
 
             if (pos[10] > pelos_M.Length - 1)
             {
@@ -395,7 +375,7 @@ public class Split : MonoBehaviour
             {
                 pelos_M[i].SetActive(pos[10] == i);
             }
-            PlayerPrefs.SetInt("pelos_m", pos[10]);
+            SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[10], 10);
         }
     }
 
@@ -404,9 +384,6 @@ public class Split : MonoBehaviour
     {
         //Asignamos la posicion
         pos[11]++;
-
-        // ???
-        DatoPos[11] = pos[11];
 
         //Si sobrepasa el tamaño del array lo volvemos a cero
         if (pos[11] > sombreros.Length - 1)
@@ -419,8 +396,8 @@ public class Split : MonoBehaviour
         {
             sombreros[i].SetActive(pos[11] == i);
         }
-        //Guardamos el ultimo item elegido
-        PlayerPrefs.SetInt("sombrero", pos[11]);
+        //Guardamos el ultimo item elegido en la posicion indicada
+        SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[11], 11);
     }
 
     //Metodo invocado desde BtnZapatos para el cambio de estilo de zapatos
@@ -428,9 +405,6 @@ public class Split : MonoBehaviour
     {
         //Asignamos la posicion
         pos[12]++;
-
-        // ???
-        DatoPos[12] = pos[12];
 
         //Si sobrepasa el tamaño del array lo volvemos a cero
         if (pos[12] > zapatos.Length - 1)
@@ -443,11 +417,11 @@ public class Split : MonoBehaviour
         {
             zapatos[i].SetActive(pos[12] == i);
         }
-        //Guardamos el ultimo item elegido
-        PlayerPrefs.SetInt("zapatos", pos[12]);
+        //Guardamos el ultimo item elegido en la posicion indicada
+        SaveManagers.GetComponent<SaveManager>().PesonalizacionPersonaje(pos[12], 12);
     }
 
-
+    //Traemos los datos de cada caracteristica
     public void TomarDatos()
     {   //0
         for (int i = 0; i < accesorios_Reloj.Length; i++)
