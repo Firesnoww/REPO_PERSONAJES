@@ -21,14 +21,14 @@ public class Cambioboton : MonoBehaviour
     public GameObject camPrincipal;
     public float velocidad = 3;
     private Vector3 posicionInicial;
-    private Vector3 rotacionInicial;
+    private Quaternion rotacionInicial;
     public bool enZoom = false;
     public Transform[] camsPositions;
 
     private void Awake()
     {
         posicionInicial = camPrincipal.transform.position;
-        //rotacionInicial = camPrincipal.transform.rotation;
+        rotacionInicial = camPrincipal.transform.rotation;
     }
 
     // Start is called before the first frame update
@@ -46,6 +46,8 @@ public class Cambioboton : MonoBehaviour
     // Update is called once per frame
     void Actualizar()
     {
+        
+
         //Activamos la posición central y habilitamos el botón de personalizacion correspondiente
         botones[conteo % 8].gameObject.SetActive(true);
         botones[conteo % 8].gameObject.GetComponent<Button>().interactable = true;
@@ -114,6 +116,10 @@ public class Cambioboton : MonoBehaviour
             enfoqueActual = 8;
         }
 
+        for (int i = 0; i < 8; i++)
+        {
+            canvasZoom.transform.GetChild(i).gameObject.SetActive((enfoqueActual - 1) == i);
+        }
 
         //switch (conteo)
         //{
@@ -262,18 +268,12 @@ public class Cambioboton : MonoBehaviour
         if (!enZoom)
         {
             camPrincipal.transform.position = Vector3.Lerp(camPrincipal.transform.position, posicionInicial, velocidad * Time.deltaTime);
-            camPrincipal.transform.rotation = Quaternion.Lerp(camPrincipal.transform.rotation, camsPositions[enfoqueActual].rotation, velocidad * Time.deltaTime);
+            camPrincipal.transform.rotation = Quaternion.Lerp(camPrincipal.transform.rotation, rotacionInicial, velocidad * Time.deltaTime);
             return;
         }
-        //Activamos el panelzoom para evitar que se opriman botones del PANEL DERECHO mientras se ejecuta el metodo Zoom
-        panelZoom.gameObject.SetActive(true);
-
-        //Habilitamos el Canvas del zoom
-        canvasZoom.gameObject.SetActive(true);
 
         camPrincipal.transform.position = Vector3.Lerp(camPrincipal.transform.position, camsPositions[enfoqueActual].position,velocidad*Time.deltaTime);
         camPrincipal.transform.rotation = Quaternion.Lerp(camPrincipal.transform.rotation, camsPositions[enfoqueActual].rotation,velocidad*Time.deltaTime);
-        canvasZoom.transform.GetChild(enfoqueActual-1).gameObject.SetActive(true);
 
     }
     
