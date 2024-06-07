@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18153828, g: 0.22717905, b: 0.30740368, a: 1}
+  m_IndirectSpecularColor: {r: 0.18153867, g: 0.22717999, b: 0.30740488, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1473,7 +1473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &415001650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5130,22 +5130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65dadfdbce0c22c4c8e547725c52db97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listaNumeros:
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  referencia: 2|2|2|2|2|2|2|2|1|1|1
-  PosGuardada: 
   pos: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   SaveManagers: {fileID: 826943520}
   genero: 0

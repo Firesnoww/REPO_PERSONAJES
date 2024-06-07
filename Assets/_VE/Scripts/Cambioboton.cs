@@ -16,13 +16,31 @@ public class Cambioboton : MonoBehaviour
     int enfoqueActual = 0;
     public GameObject panelZoom;
     public GameObject canvasZoom;
-    //Camaras virtuales
-    public CinemachineVirtualCamera[] vCams;
-    
+
+    //Posiciones de camaras
+    public GameObject camPrincipal;
+    public float velocidad = 3;
+    private Vector3 posicionInicial;
+    private Vector3 rotacionInicial;
+    public bool enZoom = false;
+    public Transform[] camsPositions;
+
+    private void Awake()
+    {
+        posicionInicial = camPrincipal.transform.position;
+        //rotacionInicial = camPrincipal.transform.rotation;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+
         Actualizar();
+    }
+
+    private void Update()
+    {
+        Zoom2();
     }
 
     // Update is called once per frame
@@ -204,61 +222,18 @@ public class Cambioboton : MonoBehaviour
     //Metodo invocado desde BtnZoom en scena para iniciar el Zoom segun el enfoque actual
     public void Zoom()
     {
+        enZoom = true;
         //Activamos el panelzoom para evitar que se opriman botones del PANEL DERECHO mientras se ejecuta el metodo Zoom
-        panelZoom.gameObject.SetActive(true);
+        panelZoom.gameObject.SetActive(enZoom);
 
         //Habilitamos el Canvas del zoom
-        canvasZoom.gameObject.SetActive(true);
+        canvasZoom.gameObject.SetActive(enZoom);
 
-        //Dependiendo de que enfoque se tenga, se activa la camara virtual y el boton de personalizacion respectivamente
-        if (enfoqueActual == 1)
+        for (int i = 0; i < 8; i++)
         {
-            //Cuerpo
-            vCams[1].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(0).gameObject.SetActive(true);
+            canvasZoom.transform.GetChild(i).gameObject.SetActive((enfoqueActual - 1)==i);
         }
-        else if (enfoqueActual == 2)
-        {
-            //Zapatos
-            vCams[2].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(1).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 3)
-        {
-            //Rostro
-            vCams[3].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(2).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 4)
-        {
-            //Cabello
-            vCams[4].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(3).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 5)
-        {
-            //Reloj
-            vCams[5].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(4).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 6)
-        {
-            //Maleta
-            vCams[6].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(5).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 7)
-        {
-            //Cejas
-            vCams[3].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(6).gameObject.SetActive(true);
-        }
-        else if (enfoqueActual == 8)
-        {
-            //Sombrero
-            vCams[4].gameObject.SetActive(true);
-            canvasZoom.transform.GetChild(7).gameObject.SetActive(true);
-        }
+       
 
     }
 
@@ -266,59 +241,41 @@ public class Cambioboton : MonoBehaviour
     //Metodo invocado desde BtnSalirZoom en scena para volver al menu de personalizacion inicial
     public void SalirZoom()
     {
-        //Desactivamos el panel y el canvas zoom
-        panelZoom.gameObject.SetActive(false);
-        canvasZoom.gameObject.SetActive(false);
+        enZoom = false;
+        //Activamos el panelzoom para evitar que se opriman botones del PANEL DERECHO mientras se ejecuta el metodo Zoom
+        panelZoom.gameObject.SetActive(enZoom);
 
-        //Dependiendo del enfoque que se le dió al zoom se deshabilita la camara virtual y el boton de personalizacion respectivamente
-        if (enfoqueActual == 1)
+        //Habilitamos el Canvas del zoom
+        canvasZoom.gameObject.SetActive(enZoom);
+
+        for (int i = 0; i < 8; i++)
         {
-            //Cuerpo
-            vCams[1].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(0).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 2)
-        {
-            //Zapatos
-            vCams[2].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(1).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 3)
-        {
-            //Rostro
-            vCams[3].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(2).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 4)
-        {
-            //Cabello
-            vCams[4].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(3).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 5)
-        {
-            //Reloj
-            vCams[5].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(4).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 6)
-        {
-            //Maleta
-            vCams[6].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(5).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 7)
-        {
-            //Cejas
-            vCams[3].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(6).gameObject.SetActive(false);
-        }
-        else if (enfoqueActual == 8)
-        {
-            //Sombrero
-            vCams[4].gameObject.SetActive(false);
-            canvasZoom.transform.GetChild(7).gameObject.SetActive(false);
+            canvasZoom.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+
+
+    
+    //Metodo invocado desde BtnZoom en scena para iniciar el Zoom segun el enfoque actual
+    public void Zoom2()
+    {
+        if (!enZoom)
+        {
+            camPrincipal.transform.position = Vector3.Lerp(camPrincipal.transform.position, posicionInicial, velocidad * Time.deltaTime);
+            camPrincipal.transform.rotation = Quaternion.Lerp(camPrincipal.transform.rotation, camsPositions[enfoqueActual].rotation, velocidad * Time.deltaTime);
+            return;
+        }
+        //Activamos el panelzoom para evitar que se opriman botones del PANEL DERECHO mientras se ejecuta el metodo Zoom
+        panelZoom.gameObject.SetActive(true);
+
+        //Habilitamos el Canvas del zoom
+        canvasZoom.gameObject.SetActive(true);
+
+        camPrincipal.transform.position = Vector3.Lerp(camPrincipal.transform.position, camsPositions[enfoqueActual].position,velocidad*Time.deltaTime);
+        camPrincipal.transform.rotation = Quaternion.Lerp(camPrincipal.transform.rotation, camsPositions[enfoqueActual].rotation,velocidad*Time.deltaTime);
+        canvasZoom.transform.GetChild(enfoqueActual-1).gameObject.SetActive(true);
+
+    }
+    
 
 }

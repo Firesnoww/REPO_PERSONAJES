@@ -8,10 +8,6 @@ using Photon.Pun.Demo.PunBasics;
 
 public class Split : MonoBehaviour
 {
-    //??
-    public string[] listaNumeros;
-    public string referencia;
-    public int[] PosGuardada;
 
     //Variable para las posiciones de guardado
     public int[] pos;
@@ -50,94 +46,6 @@ public class Split : MonoBehaviour
     {
         Gen();
     }
-
-    //[ContextMenu("Convertir")]
-    //???
-    /*
-    public void Covertir()
-    {
-        listaNumeros = referencia.Split("|");
-        //0
-        int indice = int.Parse(listaNumeros[0]);
-        for (int i = 0; i < accesorios_Reloj.Length; i++)
-        {
-            accesorios_Reloj[i].SetActive(indice == i);
-        }
-        //1
-        indice = int.Parse(listaNumeros[1]);
-        for (int i = 0; i < maleta_F.Length; i++)
-        {
-            maleta_F[i].SetActive(indice == i);
-        }
-        //2
-        indice = int.Parse(listaNumeros[2]);
-        for (int i = 0; i < maleta_M.Length; i++)
-        {
-            maleta_M[i].SetActive(indice == i);
-        }
-        //3
-        indice = int.Parse(listaNumeros[3]);
-        for (int i = 0; i < ropas_F.Length; i++)
-        {
-            ropas_F[i].SetActive(indice == i);
-        }
-        //4
-        indice = int.Parse(listaNumeros[4]);
-        for (int i = 0; i < ropas_M.Length; i++)
-        {
-            ropas_M[i].SetActive(indice == i);
-        }
-        //5
-        indice = int.Parse(listaNumeros[5]);
-        for (int i = 0; i < cabezas_F.Length; i++)
-        {
-            cabezas_F[i].SetActive(indice == i);
-        }
-        //6
-        indice = int.Parse(listaNumeros[6]);
-        for (int i = 0; i < cabezas_M.Length; i++)
-        {
-            cabezas_M[i].SetActive(indice == i);
-        }
-        //7
-        indice = int.Parse(listaNumeros[7]);
-        for (int i = 0; i < cejas_F.Length; i++)
-        {
-            cejas_F[i].SetActive(indice == i);
-        }
-        //8
-        indice = int.Parse(listaNumeros[8]);
-        for (int i = 0; i < cejas_M.Length; i++)
-        {
-            cejas_M[i].SetActive(indice == i);
-        }
-        //9
-        indice = int.Parse(listaNumeros[9]);
-        for (int i = 0; i < pelos_F.Length; i++)
-        {
-            pelos_F[i].SetActive(indice == i);
-        }
-        //10
-        indice = int.Parse(listaNumeros[10]);
-        for (int i = 0; i < pelos_M.Length; i++)
-        {
-            pelos_M[i].SetActive(indice == i);
-        }//11
-        indice = int.Parse(listaNumeros[11]);
-        for (int i = 0; i < sombreros.Length; i++)
-        {
-            sombreros[i].SetActive(indice == i);
-        }
-        //12
-        indice = int.Parse(listaNumeros[12]);
-        for (int i = 0; i < zapatos.Length; i++)
-        {
-            zapatos[i].SetActive(indice == i);
-        }
-    }
-
-    */
-
     
     //Metodo invocado desde BtnReloj para el cambio de estilo del reloj
     public void Reloj() 
